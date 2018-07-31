@@ -245,7 +245,8 @@ func scanWords(sisa []string, num map[string]string) (string, int, error) {
 			result = tmp + "00"
 			return result, 1, nil
 		default:
-			return tmp, 0, nil
+			result = tmp + num[sisa[1]]
+			return result, 1, nil
 		}
 	} else {
 		return tmp, 0, nil
