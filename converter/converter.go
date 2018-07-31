@@ -2,7 +2,6 @@ package converter
 
 import (
 	"errors"
-	"fmt"
 	"strconv"
 	"strings"
 )
@@ -38,8 +37,7 @@ func (numConv *numConverter) ConvertToWords(number int64) (string, error) {
 
 	}
 
-	fmt.Println(s)
-	return "", nil
+	return s, nil
 }
 
 func getCardinalPronoun(lvl int) string {
