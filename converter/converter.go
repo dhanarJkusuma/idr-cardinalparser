@@ -4,6 +4,7 @@ import (
 	"errors"
 	"strconv"
 	"strings"
+	"unicode"
 )
 
 type numConverter struct {
@@ -27,17 +28,32 @@ func (numConv *numConverter) ConvertToWords(number int64) (string, error) {
 	var s string
 
 	for i, val := range result {
-		if len(val) > 0 {
+		if len(val) > 0 && IsLetter(val) {
 			lvl := ml - i
-			s += getCardinal(val, nc)
-			s += " "
-			s += getCardinalPronoun(lvl)
+			if val != "000" {
+				s += getCardinal(val, nc)
+				s += " "
+				s += getCardinalPronoun(lvl)
+			}
 			s += " "
 		}
 
 	}
 
-	return s, nil
+	return standardizeSpaces(s), nil
+}
+
+func IsLetter(s string) bool {
+	for _, r := range s {
+		if !unicode.IsNumber(r) {
+			return false
+		}
+	}
+	return true
+}
+
+func standardizeSpaces(s string) string {
+	return strings.Join(strings.Fields(s), " ")
 }
 
 func getCardinalPronoun(lvl int) string {
