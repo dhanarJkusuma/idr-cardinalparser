@@ -86,6 +86,7 @@ func getCardinal(number string, nc map[byte]string) string {
 	if len(number) >= 2 {
 		if number == "11" {
 			result += "sebelas "
+			return result
 		} else {
 			lastNum := number[len(number)-1]
 			if len(number) > 2 {
